@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -18,6 +19,11 @@ public class YaroslavTest {
     @BeforeClass
     public void setBeforeClass(){
         System.setProperty("webdriver.chrome.driver","src\\lib\\chromedriver.exe");
+    }
+
+    @AfterClass
+    public void setAfterClass(){
+        driver.quit();
     }
 
     @Test
@@ -43,7 +49,7 @@ public class YaroslavTest {
         WebElement element = driver.findElement(By.cssSelector("div.ant-message-custom-content.ant-message-error > span:nth-child(2)"));
         System.out.println("Message " + element.getText());
         Assert.assertEquals(element.getText(),"Введено невірний пароль або email");
-        driver.quit();
+        driver.close();
     }
 
     @Test
@@ -68,7 +74,7 @@ public class YaroslavTest {
         WebElement element = driver.findElement(By.cssSelector("div.ant-message-custom-content.ant-message-error > span:nth-child(2)"));
         System.out.println("Message " + element.getText());
         Assert.assertEquals(element.getText(),"Ви успішно залогувались");
-        driver.quit();
+        driver.close();
     }
 
     @Test
@@ -82,7 +88,7 @@ public class YaroslavTest {
         int count = element.size();
         System.out.println("There are "+count+" elements");
         Assert.assertEquals(element.size(),8);
-        driver.quit();
+        driver.close();
     }
 
     @Test
@@ -101,7 +107,7 @@ public class YaroslavTest {
         element = driver.findElements(By.cssSelector("aside.ant-layout-sider.ant-layout-sider-dark.club-list-sider"));
         isPresent = element.size() > 0;
         Assert.assertFalse(isPresent);
-        driver.quit();
+        driver.close();
     }
 
 }
